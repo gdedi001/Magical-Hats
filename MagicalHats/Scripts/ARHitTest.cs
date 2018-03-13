@@ -27,17 +27,20 @@ public class ARHitTest : MonoBehaviour {
 		}; 
 
 		foreach (ARHitTestResultType resultType in resultTypes) {
-			if (HitTestWithResultType (point, resultType)) {
+			if (HitTestWithResultType(point, resultType)) {
 				return;
 			}
 		}
 	}
 
 	bool HitTestWithResultType (ARPoint point, ARHitTestResultType resultTypes) {
-		List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface ().HitTest (point, resultTypes);
+		List<ARHitTestResult> hitResults = UnityARSessionNativeInterface.GetARSessionNativeInterface().HitTest(point, resultTypes);
 		if (hitResults.Count > 0) {
 			foreach (var hitResult in hitResults) {
+				Vector3 hitPosition = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
+				Quaternion rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
 				//TODO: get the position and rotations to spawn the hat
+				Instantiate(hitPrefab, hitPosition, rotation);
 				return true;
 			}
 		}
