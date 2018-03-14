@@ -6,6 +6,7 @@ using UnityEngine.XR.iOS;
 public class ARHitTest : MonoBehaviour {
 	public Camera ARCamera; //the Virtual Camera used for AR
 	public GameObject hitPrefab; //prefab we place on a hit test
+	public GameObject Effect;
 
 	private List<GameObject> spawnedObjects = new List<GameObject>(); //array used to keep track of spawned objects
 
@@ -41,6 +42,7 @@ public class ARHitTest : MonoBehaviour {
 				Quaternion rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
 				//TODO: get the position and rotations to spawn the hat
 				spawnedObjects.Add(Instantiate(hitPrefab, hitPosition, rotation));
+				Instantiate (Effect, hitPosition, rotation); // spawn particle system
 				return true;
 			}
 		}
@@ -59,12 +61,10 @@ public class ARHitTest : MonoBehaviour {
 		//if we do, then check to see if it is part of the spawnedObjects array
 		//if so, then delete the object we raycast hit
 		RaycastHit hit;
-		Vector3 fwd = transform.TransformDirection(Vector3.forward);
-		if (Physics.Raycast(point, fwd, out hit, 100.0f)) {
-			Debug.Log (hit.transform.gameObject);
-			if (spawnedObjects.Contains(hit.transform.gameObject)) {
-				hit.transform.gameObject.SetActive(false);
-				spawnedObjects.Remove (hit.transform.gameObject);
+		if (Physics.Raycast(ARCamera.ScreenPointToRay(point), out hit)) {
+			GameObject item = hit.collider.transform.parent.gameObject; // parent is what is stored in our area
+			if (spawnedObjects.Remove (item)) {
+				Destroy (item);
 			}
 		}
 
@@ -84,13 +84,22 @@ public class ARHitTest : MonoBehaviour {
 		//TODO:
 		//iterate numShuffles times
 		//pick two hats randomly from spawnedObject and call the Co-routine Swap with their Transforms
-		yield return null; //placeholder to make sure this compiles
+		GameObject hatA;
+		GameObject hatB;
+		for (int i = 0; i < numSuffles; i++) {
+			hatA = spawnedObjects[Random.Range(0, spawnedObjects.Count)];
+			hatB = spawnedObjects [Random.Range (0, spawnedObjects.Count)];
+			yield return StartCoroutine(Swap (hatA.transform, hatB.transform, 1.0f));
+		}
 	}
 
 	IEnumerator Swap(Transform item1, Transform item2, float duration){
 		//Lerp the position of item1 and item2 so that they switch places
 		//the transition should take "duration" amount of time
 		//Optional: try making sure the hats do not collide with each other
+		item1.position = Vector3.Lerp(item1.position, item2.position, Time.deltaTime * duration);
+		item2.position = Vector3.Lerp(item2.position, item1.position, Time.deltaTime * duration);
+
 		yield return null; //placeholder to make sure this compiles
 	}
 }
