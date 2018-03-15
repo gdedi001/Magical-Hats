@@ -6,6 +6,8 @@ using UnityEngine.XR.iOS;
 public class ARHitTest : MonoBehaviour {
 	public Camera ARCamera; //the Virtual Camera used for AR
 	public GameObject hitPrefab; //prefab we place on a hit test
+	//[SerializeField]
+	//private GameObject hat; // the individual hat mesh from main prefab
 
 	private List<GameObject> spawnedObjects = new List<GameObject>(); //array used to keep track of spawned objects
 
@@ -49,20 +51,23 @@ public class ARHitTest : MonoBehaviour {
 	// Fixed Update is called once per frame
 	void FixedUpdate () {
 		if (Input.GetMouseButtonDown(0)) { //this works with touch as well as with a mouse
-			RemoveObject (Input.mousePosition);
+			RaiseHat (Input.mousePosition);
 		}
 	}
 
-	public void RemoveObject(Vector2 point) {
+	public void RaiseHat(Vector2 point) {
 		//TODO: Raycast from the screen point into the virtual world and see if we hit anything
 		//if we do, then check to see if it is part of the spawnedObjects array
 		//if so, then delete the object we raycast hit
 		RaycastHit hit;
 		if (Physics.Raycast(ARCamera.ScreenPointToRay(point), out hit)) {
 			GameObject item = hit.collider.transform.parent.gameObject; // parent is what is stored in our area
+			/*
 			if (spawnedObjects.Remove (item)) {
 				Destroy (item);
 			}
+			*/
+			item.GetComponent<Animator> ().SetBool ("reveal", true);
 		}
 
 	}
