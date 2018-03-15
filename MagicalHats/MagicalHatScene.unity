@@ -108,6 +108,11 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &166311970 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4238045152583678, guid: ae1085ee42e6b4f519a3f6cf90c84607,
+    type: 2}
+  m_PrefabInternal: {fileID: 1506246275}
 --- !u!1 &183756057
 GameObject:
   m_ObjectHideFlags: 0
@@ -538,6 +543,79 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &750834528
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 166311970}
+    m_Modifications:
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1015576372813440, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4249359944124282, guid: fbdb0b280789440678aa36806de97767, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 198221453913853704, guid: fbdb0b280789440678aa36806de97767,
+        type: 2}
+      propertyPath: InitialModule.maxNumParticles
+      value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 198221453913853704, guid: fbdb0b280789440678aa36806de97767,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1781729450
+      objectReference: {fileID: 0}
+    - target: {fileID: 198221453913853704, guid: fbdb0b280789440678aa36806de97767,
+        type: 2}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: fbdb0b280789440678aa36806de97767, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &901383414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1180,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ARCamera: {fileID: 901383415}
   hitPrefab: {fileID: 1521505803350430, guid: ae1085ee42e6b4f519a3f6cf90c84607, type: 2}
-  bunny: {fileID: 0}
   Effect: {fileID: 1000010715882420, guid: 14d81e2c407975245973a11cdfbeb902, type: 2}
 --- !u!4 &1911704577
 Transform:

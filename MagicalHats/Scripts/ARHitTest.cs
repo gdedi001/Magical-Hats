@@ -40,7 +40,6 @@ public class ARHitTest : MonoBehaviour {
 			foreach (var hitResult in hitResults) {
 				Vector3 hitPosition = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
 				Quaternion rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
-				//TODO: get the position and rotations to spawn the hat
 				spawnedObjects.Add(Instantiate(hitPrefab, hitPosition, rotation));
 				Instantiate (Effect, hitPosition, rotation); // spawn particle system
 				return true;
