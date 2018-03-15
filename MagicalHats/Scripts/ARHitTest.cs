@@ -88,7 +88,7 @@ public class ARHitTest : MonoBehaviour {
 		for (int i = 0; i < numSuffles; i++) {
 			hatA = spawnedObjects[Random.Range(0, spawnedObjects.Count)];
 			hatB = spawnedObjects [Random.Range(0, spawnedObjects.Count)];
-			yield return StartCoroutine(Swap (hatA.transform, hatB.transform, 1.0f));
+			yield return StartCoroutine(Swap (hatA.transform, hatB.transform, 5.0f));
 		}
 	}
 
