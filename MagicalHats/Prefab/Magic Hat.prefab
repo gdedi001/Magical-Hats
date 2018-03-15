@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 4460450683076788}
   - component: {fileID: 95735219212265004}
   m_Layer: 0
-  m_Name: Magic Hat 1
+  m_Name: Magic Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

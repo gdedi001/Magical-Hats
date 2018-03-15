@@ -6,7 +6,6 @@ using UnityEngine.XR.iOS;
 public class ARHitTest : MonoBehaviour {
 	public Camera ARCamera; //the Virtual Camera used for AR
 	public GameObject hitPrefab; //prefab we place on a hit test
-	public GameObject Effect;
 
 	private List<GameObject> spawnedObjects = new List<GameObject>(); //array used to keep track of spawned objects
 
@@ -41,7 +40,6 @@ public class ARHitTest : MonoBehaviour {
 				Vector3 hitPosition = UnityARMatrixOps.GetPosition(hitResult.worldTransform);
 				Quaternion rotation = UnityARMatrixOps.GetRotation(hitResult.worldTransform);
 				spawnedObjects.Add(Instantiate(hitPrefab, hitPosition, rotation));
-				Instantiate (Effect, hitPosition, rotation); // spawn particle system
 				return true;
 			}
 		}
@@ -87,7 +85,7 @@ public class ARHitTest : MonoBehaviour {
 		GameObject hatB;
 		for (int i = 0; i < numSuffles; i++) {
 			hatA = spawnedObjects[Random.Range(0, spawnedObjects.Count)];
-			hatB = spawnedObjects [Random.Range (0, spawnedObjects.Count)];
+			hatB = spawnedObjects [Random.Range(0, spawnedObjects.Count)];
 			yield return StartCoroutine(Swap (hatA.transform, hatB.transform, 1.0f));
 		}
 	}
@@ -96,8 +94,10 @@ public class ARHitTest : MonoBehaviour {
 		//Lerp the position of item1 and item2 so that they switch places
 		//the transition should take "duration" amount of time
 		//Optional: try making sure the hats do not collide with each other
-		item1.position = Vector3.Lerp(item1.position, item2.position, Time.deltaTime * duration);
-		item2.position = Vector3.Lerp(item2.position, item1.position, Time.deltaTime * duration);
+		Vector3 startPos = item1.position;
+		Vector3 endPos = item2.position;
+		item1.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * duration);
+		item2.position = Vector3.Lerp(endPos, startPos, Time.deltaTime * duration);
 
 		yield return null; //placeholder to make sure this compiles
 	}
