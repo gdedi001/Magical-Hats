@@ -6,8 +6,6 @@ using UnityEngine.XR.iOS;
 public class ARHitTest : MonoBehaviour {
 	public Camera ARCamera; //the Virtual Camera used for AR
 	public GameObject hitPrefab; //prefab we place on a hit test
-	//[SerializeField]
-	//private GameObject hat; // the individual hat mesh from main prefab
 
 	private List<GameObject> spawnedObjects = new List<GameObject>(); //array used to keep track of spawned objects
 
@@ -62,14 +60,13 @@ public class ARHitTest : MonoBehaviour {
 		RaycastHit hit;
 		if (Physics.Raycast(ARCamera.ScreenPointToRay(point), out hit)) {
 			GameObject item = hit.collider.transform.parent.gameObject; // parent is what is stored in our area
+			item.GetComponent<Animator> ().SetBool ("reveal", true);
 			/*
 			if (spawnedObjects.Remove (item)) {
 				Destroy (item);
 			}
 			*/
-			item.GetComponent<Animator> ().SetBool ("reveal", true);
 		}
-
 	}
 		
 	/// <summary>
@@ -99,11 +96,14 @@ public class ARHitTest : MonoBehaviour {
 		//Lerp the position of item1 and item2 so that they switch places
 		//the transition should take "duration" amount of time
 		//Optional: try making sure the hats do not collide with each other
+		float t = 0;
 		Vector3 startPos = item1.position;
 		Vector3 endPos = item2.position;
-		item1.position = Vector3.Lerp(startPos, endPos, Time.deltaTime * duration);
-		item2.position = Vector3.Lerp(endPos, startPos, Time.deltaTime * duration);
-
-		yield return null; //placeholder to make sure this compiles
+		while (t < duration) {
+			t += Time.deltaTime;
+			item1.position = Vector3.Lerp (startPos, endPos, t / duration);
+			item2.position = Vector3.Lerp (endPos, startPos, t / duration);
+			yield return null;
+		}
 	}
 }
